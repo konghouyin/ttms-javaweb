@@ -14,8 +14,8 @@ public class userService {
 		User back = userDao.userGetByName(person);
 		if (back == null) {
 			userDao.userInsert(person);
-			System.out.println("注册时没有找到同名用户");
-			return person;
+			User back1 = userDao.userGetByName(person);
+			return back1;
 		}else {
 			return null;
 		}
