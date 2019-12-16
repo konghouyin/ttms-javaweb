@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 @WebFilter(filterName = "AccessOrigin", urlPatterns = { "/*" }, initParams = {
-		@WebInitParam(name = "origin", value = "http://localhost:8080") })
+		@WebInitParam(name = "origin", value = "http://localhost:8081") })
 public class AccessOrigin implements Filter {
 	private FilterConfig config = null;
 
