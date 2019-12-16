@@ -16,4 +16,9 @@ public class daoFactory {
 	public static IcommentDao createCommentDao() {
 	    return new commentDaoImpl();
 	}
+	
+	public static IplayDao createPlayDao() {
+		return new playDaoImpl();
+	}
+	
 }
