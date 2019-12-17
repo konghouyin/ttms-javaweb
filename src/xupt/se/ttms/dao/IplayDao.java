@@ -13,4 +13,6 @@ public interface IplayDao {
 	 int playUpdate(Play play);
 
 	 List<Play> getPlayAll();
+	 
+	 Play playGetByID(String playid);
 }

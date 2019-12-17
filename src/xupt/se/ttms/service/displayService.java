@@ -14,4 +14,9 @@ public class displayService {
 		List<Play> plist=playDao.getPlayAll();
 		return plist;
 	} 
+	
+	public Play getoneplay(String playid) {
+		Play p =playDao.playGetByID(playid);
+		return p;
+	}
 }
