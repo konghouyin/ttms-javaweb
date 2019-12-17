@@ -29,10 +29,10 @@ public class login extends HttpServlet {
 			System.out.println(JSON.toJSONString(JSONobj));
 			response.getWriter().println(JSON.toJSONString(JSONobj));
 		} else {
+			request.getSession().setAttribute("userId", backUser.getUser_id());
+			request.getSession().setAttribute("userStatus", backUser.getUser_status());
 			backMessage JSONobj = new backMessage(1, "登录成功", backUser);
 			response.getWriter().println(JSON.toJSONString(JSONobj));
-			
 		}
 	}
-
 }

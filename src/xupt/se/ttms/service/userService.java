@@ -14,8 +14,8 @@ public class userService {
 		User back = userDao.userGetByName(person);
 		if (back == null) {
 			userDao.userInsert(person);
-			System.out.println("娉ㄥ唽鏃舵病鏈夋壘鍒板悓鍚嶇敤鎴�");
-			return person;
+			User back1 = userDao.userGetByName(person);
+			return back1;
 		}else {
 			return null;
 		}
