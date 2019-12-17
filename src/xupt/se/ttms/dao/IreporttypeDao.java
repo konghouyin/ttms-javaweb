@@ -13,7 +13,9 @@ public interface IreporttypeDao {
     //增删查
     int reporttypeInsert(Reporttype reporttype);
 
-    int reporttypeDelete(Integer rListtType_id);
+    int reporttypeDelete(String rListtType_id);
 
     List<Reporttype> getReportTypeAll();
+
+    List<String> getReportByStatus();
 }

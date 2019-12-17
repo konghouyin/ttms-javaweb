@@ -36,4 +36,9 @@ public class AccessOrigin implements Filter {
 		
 	}
 
+	@Override
+	public void destroy() {
+
+	}
+
 }
