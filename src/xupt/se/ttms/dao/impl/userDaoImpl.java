@@ -22,7 +22,6 @@ public class userDaoImpl implements IuserDao{
             ps = conn.prepareStatement("INSERT INTO user (user_status,user_name,user_password,user_time) VALUES ('1',?,?,NOW())");
             ps.setString(1, user.getUser_name());
             ps.setString(2, user.getUser_password());
-
             ps.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -53,16 +52,15 @@ public class userDaoImpl implements IuserDao{
         Connection conn = JDBC.getConnection();
         PreparedStatement ps = null;
         try {
-            ps = conn.prepareStatement("update user (user_id,user_status,user_password,user_name,user_age,user_sex,user_tel,user_mail,user_time) VALUES (?,?,?,?,?,?,?,?,?) where user_id=?");
-            ps.setInt(1,user.getUser_id());
-            ps.setString(2, user.getUser_status());
-            ps.setString(3,user.getUser_password());
-            ps.setString(4,user.getUser_name());
-            ps.setInt(5,user.getUser_age());
-            ps.setInt(6,user.getUser_sex());
-            ps.setString(7,user.getUser_tel());
-            ps.setString(8,user.getUser_mail());
-            ps.setString(8,user.getUser_time());
+            ps = conn.prepareStatement("update user set user_status = ?,user_name = ?,user_age = ?,user_sex = ?,user_tel = ?,user_mail = ? where user_id=?");
+           
+            ps.setString(1, user.getUser_status());
+            ps.setString(2,user.getUser_name());
+            ps.setInt(3,user.getUser_age());
+            ps.setInt(4,user.getUser_sex());
+            ps.setString(5,user.getUser_tel());
+            ps.setString(6,user.getUser_mail());
+            ps.setInt(7,user.getUser_id());
             ps.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
