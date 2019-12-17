@@ -2,6 +2,7 @@ package xupt.se.ttms.domain;
 
 public class backMessage {
 	private int style;
+	
 	public int getStyle() {
 		return style;
 	}

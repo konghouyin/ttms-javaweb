@@ -22,7 +22,7 @@ public class commentDaoImpl implements IcommentDao {
 
     @Override
     public int commentInsert(Comment comment) {
-        Connection conn = JDBC.getConnection();
+        Connection conn = this.JDBC.getConnection();
         PreparedStatement ps = null;
         try {
             ps = conn.prepareStatement("INSERT INTO comment (play_id,user_id,comment_message,comment_time,comment_grade,comment_status,comment_dateout) VALUES (?,?,?,?,?,?,?)");

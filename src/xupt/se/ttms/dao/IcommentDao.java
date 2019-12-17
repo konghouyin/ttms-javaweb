@@ -1,7 +1,6 @@
 package xupt.se.ttms.dao;
 
 import xupt.se.ttms.domain.Comment;
-
 import java.util.List;
 
 /**

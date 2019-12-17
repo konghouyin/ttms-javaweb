@@ -16,4 +16,12 @@ public class daoFactory {
 	public static IcommentDao createCommentDao() {
 	    return new commentDaoImpl();
 	}
+	
+	public static IcinemaDao createCinemaDao() {
+	    return new cinemaDaoImpl();
+	}
+	
+	public static IseatDao createSeatDao() {
+	    return new seatDaoImpl();
+	}
 }

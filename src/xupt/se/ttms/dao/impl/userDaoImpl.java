@@ -16,7 +16,7 @@ public class userDaoImpl implements IuserDao{
 	private JDBCConnect JDBC= new JDBCMysqlConnectImpl();		
 	
 	public int userInsert(User user) {
-        Connection conn = JDBC.getConnection();
+        Connection conn = this.JDBC.getConnection();
         PreparedStatement ps = null;
         try {
             ps = conn.prepareStatement("INSERT INTO user (user_status,user_name,user_password,user_time) VALUES ('1',?,?,NOW())");
@@ -28,13 +28,13 @@ public class userDaoImpl implements IuserDao{
             e.printStackTrace();
             return 0;
         }finally {
-            JDBC.close(conn,ps,null);
+            this.JDBC.close(conn,ps,null);
         }
         return 1;
     }
 	
     public int userDelete(int user_id) {
-    	Connection conn = JDBC.getConnection();
+    	Connection conn = this.JDBC.getConnection();
         PreparedStatement ps = null;
         try {
             ps = conn.prepareStatement("delete from user where user_id=?");
@@ -44,13 +44,13 @@ public class userDaoImpl implements IuserDao{
             e.printStackTrace();
             return 0;
         }finally {
-            JDBC.close(conn,ps,null);
+            this.JDBC.close(conn,ps,null);
         }
         return 1;
     } 
     
     public int userUpdate(User user) {
-        Connection conn = JDBC.getConnection();
+        Connection conn = this.JDBC.getConnection();
         PreparedStatement ps = null;
         try {
             ps = conn.prepareStatement("update user (user_id,user_status,user_password,user_name,user_age,user_sex,user_tel,user_mail,user_time) VALUES (?,?,?,?,?,?,?,?,?) where user_id=?");
@@ -68,14 +68,14 @@ public class userDaoImpl implements IuserDao{
             e.printStackTrace();
             return 0;
         }finally {
-            JDBC.close(conn,ps,null);
+            this.JDBC.close(conn,ps,null);
         }
         return 1;
     }
     
     
     public List<User> getUserAll() {
-        Connection conn = JDBC.getConnection();
+        Connection conn = this.JDBC.getConnection();
         PreparedStatement ps = null;
         ResultSet resultSet = null;
         try {
@@ -102,7 +102,7 @@ public class userDaoImpl implements IuserDao{
             e.printStackTrace();
             return null;
         } finally {
-            JDBC.close(conn, ps, resultSet);
+            this.JDBC.close(conn, ps, resultSet);
         }
     }
 

@@ -30,8 +30,7 @@ public class login extends HttpServlet {
 			response.getWriter().println(JSON.toJSONString(JSONobj));
 		} else {
 			backMessage JSONobj = new backMessage(1, "登录成功", backUser);
-			response.getWriter().println(JSON.toJSONString(JSONobj));
-			
+			response.getWriter().println(JSON.toJSONString(JSONobj));			
 		}
 	}
 
