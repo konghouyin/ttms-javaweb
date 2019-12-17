@@ -16,7 +16,11 @@ import java.io.IOException;
 public class reportAddServlet extends HttpServlet {
     @Override
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String id = req.getParameter("id");
-        System.out.println(id);
+        String comment_id = req.getParameter("id");
+        String type = req.getParameter("type");
+        String msg = req.getParameter("msg");
+
+        Integer userid = 40;
+
     }
 }

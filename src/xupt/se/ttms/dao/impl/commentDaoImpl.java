@@ -3,12 +3,9 @@ package xupt.se.ttms.dao.impl;
 import xupt.se.ttms.dao.IcommentDao;
 import xupt.se.ttms.domain.Advancedcomment;
 import xupt.se.ttms.domain.Comment;
-<<<<<<< HEAD
 import xupt.se.ttms.domain.Report;
 import xupt.se.ttms.domain.ReportComment;
-=======
 import xupt.se.ttms.domain.Play;
->>>>>>> de849eada06032a61bb14667b44acf4f25537f48
 import xupt.se.ttms.util.JDBCConnect;
 import xupt.se.ttms.util.JDBCMysqlConnectImpl;
 
