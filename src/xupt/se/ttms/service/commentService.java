@@ -1,6 +1,9 @@
 package xupt.se.ttms.service;
 
+import java.util.List;
+
 import xupt.se.ttms.dao.IcommentDao;
+import xupt.se.ttms.domain.Advancedcomment;
 import xupt.se.ttms.domain.Comment;
 import xupt.se.ttms.domain.ReportComment;
 import xupt.se.ttms.factory.*;
@@ -19,10 +22,11 @@ public class commentService {
         commentDao.commentInsert(comment);
         return 1;
     }
-
-    public List<ReportComment> getCommentByStatus(){
-        List<ReportComment> commentByStatus = commentDao.getCommentByStatus();
-
-        return commentByStatus;
+    
+    public List<Advancedcomment> getplaycomment(String playid){
+    	
+    	List<Advancedcomment> comments=commentDao.getplaycomments(playid);
+    	
+    	return comments;
     }
 }

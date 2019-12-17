@@ -1,5 +1,6 @@
 package xupt.se.ttms.dao;
 
+import xupt.se.ttms.domain.Advancedcomment;
 import xupt.se.ttms.domain.Comment;
 import xupt.se.ttms.domain.ReportComment;
 
@@ -19,5 +20,5 @@ public interface IcommentDao {
 
     List<Comment> getCommentAll();
 
-    List<ReportComment> getCommentByStatus();
+	List<Advancedcomment> getplaycomments(String playid);
 }
