@@ -14,8 +14,13 @@ public class userService {
 		User back = userDao.userGetByName(person);
 		if (back == null) {
 			userDao.userInsert(person);
+<<<<<<< HEAD
 			User back1 = userDao.userGetByName(person);
 			return back1;
+=======
+			System.out.println("娉ㄥ唽鏃舵病鏈夋壘鍒板悓鍚嶇敤鎴�");
+			return person;
+>>>>>>> e3e5d4fc6cb5332627cbaf2d311a3b40b1abab13
 		}else {
 			return null;
 		}
@@ -29,12 +34,12 @@ public class userService {
 		User back = userDao.userGetByName(person);
 		if (back == null) {
 			return null;
-			// 数据库没已经有该用户名
+			// 鏁版嵁搴撴病宸茬粡鏈夎鐢ㄦ埛鍚�
 		} else if (back.getUser_password().equals(password)) {
 			return back;
 		} else {
 			return null;
-			// 密码错误
+			// 瀵嗙爜閿欒
 		}
 	}
 }

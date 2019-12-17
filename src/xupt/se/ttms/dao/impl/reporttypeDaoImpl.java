@@ -25,7 +25,7 @@ public class reporttypeDaoImpl implements IreporttypeDao {
         Connection conn = JDBC.getConnection();
         PreparedStatement ps = null;
         try {
-            ps = conn.prepareStatement("INSERT INTO reporttype (reportType_id,reportType_name,reportType_status) VALUES ('1',?,?)");
+            ps = conn.prepareStatement("INSERT INTO reporttype (reportType_name,reportType_status) VALUES (?,?)");
             ps.setString(1,reporttype.getReportType_name());
             ps.setInt(2, reporttype.getReportType_status());
             ps.executeUpdate();
@@ -39,12 +39,12 @@ public class reporttypeDaoImpl implements IreporttypeDao {
     }
 
     @Override
-    public int reporttypeDelete(Integer reportType_id) {
+    public int reporttypeDelete(String reportType_id) {
         Connection conn = JDBC.getConnection();
         PreparedStatement ps = null;
         try {
-            ps = conn.prepareStatement("delete from reporttype where reportType=?");
-            ps.setInt(1,reportType_id);
+            ps = conn.prepareStatement("update reporttype set reportType_status=2 where reportType_name=?");
+            ps.setString(1,reportType_id);
             ps.executeUpdate();
         }catch (Exception e){
             e.printStackTrace();
@@ -74,6 +74,29 @@ public class reporttypeDaoImpl implements IreporttypeDao {
                 type.setReportType_name(resultSet.getString("reportType_name"));
                 type.setReportType_status(resultSet.getInt("reportType_status"));
                 list.add(type);
+            }
+            return list;
+        }catch (Exception e){
+            e.printStackTrace();
+            return null;
+        }finally {
+            JDBC.close(conn, ps, resultSet);
+        }
+    }
+
+    @Override
+    public List<String> getReportByStatus() {
+        Connection conn = JDBC.getConnection();
+        PreparedStatement ps = null;
+        ResultSet resultSet = null;
+        try {
+            ps = conn.prepareStatement("select * from reporttype where reportType_status=1");
+//            ps.setInt(1,reportType_id);
+            resultSet = ps.executeQuery();
+            List<String> list = new ArrayList<>();
+            while(resultSet.next()) {
+                String reportType_name = resultSet.getString("reportType_name");
+                list.add(reportType_name);
             }
             return list;
         }catch (Exception e){

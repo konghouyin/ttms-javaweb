@@ -18,6 +18,7 @@ public class displayService {
 	public List<Play> getallplay() {
 		List<Play> plist = playDao.getPlayAll();
 		return plist;
+<<<<<<< HEAD
 	}
 
 	public JSONObject analysisPath(String path) {
@@ -65,4 +66,12 @@ public class displayService {
 		return playDao.playInsert(playObj);
 	}
 
+=======
+	} 
+	
+	public Play getoneplay(String playid) {
+		Play p =playDao.playGetByID(playid);
+		return p;
+	}
+>>>>>>> e3e5d4fc6cb5332627cbaf2d311a3b40b1abab13
 }
