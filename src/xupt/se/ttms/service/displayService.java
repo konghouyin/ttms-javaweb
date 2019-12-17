@@ -39,4 +39,30 @@ public class displayService {
 			return (JSONObject) jsonTool.getJSONObject("index.base");
 		}
 	}
+
+	public int addPlay(String path, String name, 
+			String type, String director,String performer, String length, String country, 
+			String language, String status, String pic, String link,
+			String comment,String message) {
+		
+		Play playObj =  new Play();
+		playObj.setPlay_name(name);
+		playObj.setPlay_path(path);
+		playObj.setPlay_type(type);
+		playObj.setPlay_director(director);
+		playObj.setPlay_performer(performer);
+		playObj.setPlay_length(length);
+		playObj.setPlay_country(country);
+		playObj.setPlay_language(language);
+		playObj.setPlay_status(status);
+		playObj.setPlay_pic(pic);
+		playObj.setPlay_link(link);
+		playObj.setPlay_message(message);
+		
+		System.out.println(playObj.toString());
+
+		
+		return playDao.playInsert(playObj);
+	}
+
 }
