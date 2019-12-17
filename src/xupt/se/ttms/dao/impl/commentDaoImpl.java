@@ -1,7 +1,9 @@
 package xupt.se.ttms.dao.impl;
 
 import xupt.se.ttms.dao.IcommentDao;
+import xupt.se.ttms.domain.Advancedcomment;
 import xupt.se.ttms.domain.Comment;
+import xupt.se.ttms.domain.Play;
 import xupt.se.ttms.util.JDBCConnect;
 import xupt.se.ttms.util.JDBCMysqlConnectImpl;
 
@@ -86,6 +88,7 @@ public class commentDaoImpl implements IcommentDao {
 
     @Override
     public List<Comment> getCommentAll() {
+    	System.out.println("getCommentAll");
         Connection conn = JDBC.getConnection();
         PreparedStatement ps = null;
         ResultSet resultSet = null;
@@ -117,4 +120,37 @@ public class commentDaoImpl implements IcommentDao {
             JDBC.close(conn, ps, resultSet);
         }
     }
+
+	@Override
+	public List<Advancedcomment> getplaycomments(String playid) {
+		Connection conn = JDBC.getConnection();
+        PreparedStatement ps = null;
+        ResultSet resultSet = null;
+        List<Advancedcomment> list = new ArrayList<Advancedcomment>();        
+        
+        try {
+            ps = conn.prepareStatement("select comment_id,play_id,`user`.user_id,comment_message,comment_time,comment_id,comment_status,comment_dateout,user_name from comment,user where comment.user_id = `user`.user_id and play_id = ?");
+            ps.setString(1, playid);
+            resultSet = ps.executeQuery();
+            while(resultSet.next()) {
+            	Advancedcomment type = new Advancedcomment();
+				type.setComment_id(resultSet.getInt("comment_id"));
+				type.setPlay_id(resultSet.getInt("play_id"));
+				type.setUser_id(resultSet.getInt("user_id"));
+				type.setComment_message(resultSet.getString("comment_message"));
+				type.setComment_time(resultSet.getString("comment_time"));
+				type.setComment_grade(resultSet.getInt("comment_id"));
+				type.setComment_status(resultSet.getInt("comment_status"));
+				type.setComment_dateout(resultSet.getInt("comment_dateout"));
+				type.setUser_name(resultSet.getString("user_name"));
+                list.add(type);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }finally {
+            JDBC.close(conn,ps,resultSet);
+        }
+		return list;
+	}
 }

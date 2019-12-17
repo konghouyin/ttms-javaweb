@@ -11,9 +11,11 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.alibaba.fastjson.JSON;
 
+import xupt.se.ttms.domain.Advancedcomment;
 import xupt.se.ttms.domain.Comment;
 import xupt.se.ttms.domain.Play;
 import xupt.se.ttms.domain.backMessage;
+import xupt.se.ttms.service.commentService;
 import xupt.se.ttms.service.displayService;
 
 @WebServlet("/getplaycomment")
@@ -23,7 +25,7 @@ public class getplaycomment extends HttpServlet {
 		String playid = request.getParameter("playid");
 		
 		commentService commentService = new commentService();
-		List<Comment> playcomment=commentService.getplaycomment(playid);
+		List<Advancedcomment> playcomment=commentService.getplaycomment(playid);
 		System.out.println(playcomment);
 		
 		if (playcomment == null) {
