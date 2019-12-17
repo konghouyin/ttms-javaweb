@@ -11,29 +11,30 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.alibaba.fastjson.JSON;
 
+import xupt.se.ttms.domain.Comment;
 import xupt.se.ttms.domain.Play;
 import xupt.se.ttms.domain.backMessage;
 import xupt.se.ttms.service.displayService;
 
-
-@WebServlet("/displayone")
-public class displayone extends HttpServlet {
+@WebServlet("/getplaycomment")
+public class getplaycomment extends HttpServlet {
 	private static final long serialVersionUID = 1L;   
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {		
 		String playid = request.getParameter("playid");
 		
-		displayService playService = new displayService();
-		Play oneplay=playService.getoneplay(playid);
-		System.out.println(oneplay);
+		commentService commentService = new commentService();
+		List<Comment> playcomment=commentService.getplaycomment(playid);
+		System.out.println(playcomment);
 		
-		if (oneplay == null) {
-			backMessage JSONobj = new backMessage(-1, "数据库中无影片", null);
+		if (playcomment == null) {
+			backMessage JSONobj = new backMessage(-1, "数据库中无评论", null);
 			String aString = JSON.toJSONString(JSONobj);
 			response.getWriter().println(aString);
 		} else {
-			backMessage JSONobj = new backMessage(1, "获取影片成功", oneplay);
+			backMessage JSONobj = new backMessage(1, "获取评论成功", playcomment);
 			String aString = JSON.toJSONString(JSONobj);
 			response.getWriter().println(aString);
 		}
 	}
+
 }
