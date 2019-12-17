@@ -30,7 +30,7 @@ public class commentAdd extends HttpServlet {
         System.out.println(grade);
 
         Date date = new Date();
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         //从前端或者自己模拟一个日期格式，转为String即可
         String dateStr = format.format(date);
         Comment comment = new Comment();

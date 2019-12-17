@@ -2,6 +2,8 @@ package xupt.se.ttms.dao.impl;
 
 import xupt.se.ttms.dao.IcommentDao;
 import xupt.se.ttms.domain.Comment;
+import xupt.se.ttms.domain.Report;
+import xupt.se.ttms.domain.ReportComment;
 import xupt.se.ttms.util.JDBCConnect;
 import xupt.se.ttms.util.JDBCMysqlConnectImpl;
 
@@ -107,6 +109,36 @@ public class commentDaoImpl implements IcommentDao {
                 type.setComment_grade(resultSet.getInt("comment_id"));
                 type.setComment_status(resultSet.getInt("comment_status"));
                 type.setComment_dateout(resultSet.getInt("comment_dateout"));
+                list.add(type);
+            }
+            return list;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        } finally {
+            JDBC.close(conn, ps, resultSet);
+        }
+    }
+
+    @Override
+    public List<ReportComment> getCommentByStatus() {
+        Connection conn = JDBC.getConnection();
+        PreparedStatement ps = null;
+        ResultSet resultSet = null;
+        try {
+            ps = conn.prepareStatement("select user_name,play_name,comment_message  from user,comment,play where comment_status=2 and user.user_id=comment.user_id and comment.play_id=play.play_id");
+//            ps.setInt(1,reportType_id);
+            resultSet = ps.executeQuery();
+            List<ReportComment> list = new ArrayList<>();
+            while (resultSet.next()) {
+                ReportComment type = new ReportComment();
+//                stu.setName(res.getString("name"));
+//                stu.setAge(res.getInt("age"));
+//                stu.setId(res.getInt("id"));
+
+                type.setComment_message(resultSet.getString("comment_message"));
+                type.setUsername(resultSet.getString("user_name"));
+                type.setPlayname(resultSet.getString("play_name"));
                 list.add(type);
             }
             return list;
