@@ -9,6 +9,7 @@ import java.util.List;
 
 import xupt.se.ttms.dao.IplayDao;
 import xupt.se.ttms.domain.Play;
+import xupt.se.ttms.domain.User;
 import xupt.se.ttms.util.JDBCConnect;
 import xupt.se.ttms.util.JDBCMysqlConnectImpl;
 
@@ -124,5 +125,43 @@ public class playDaoImpl implements IplayDao {
             JDBC.close(conn, ps, resultSet);
         }
 	}
-
+	
+	
+	public Play playGetByID(String playid) {
+		Connection conn = JDBC.getConnection();
+        PreparedStatement ps = null;
+        ResultSet resultSet = null;
+        
+        Play oneplay = new Play();
+        
+        try {
+            ps = conn.prepareStatement("SELECT * FROM play WHERE play_id=?");
+            ps.setString(1, playid);
+            resultSet = ps.executeQuery();
+            if(resultSet.next()) {
+            	oneplay.setPlay_id(resultSet.getInt("play_id"));
+            	oneplay.setPlay_name(resultSet.getString("play_name"));
+            	oneplay.setPlay_director(resultSet.getString("play_director"));
+            	oneplay.setPlay_performer(resultSet.getString("play_performer"));
+            	oneplay.setPlay_type(resultSet.getString("play_type"));
+            	oneplay.setPlay_length(resultSet.getString("play_length"));
+            	oneplay.setPlay_country(resultSet.getString("play_country"));
+            	oneplay.setPlay_language(resultSet.getString("play_language"));
+            	oneplay.setPlay_status(resultSet.getString("play_status")); 
+            	oneplay.setPlay_pic(resultSet.getString("play_pic")); 
+            	oneplay.setPlay_message(resultSet.getString("play_message")); 
+            	oneplay.setPlay_link(resultSet.getString("play_link")); 
+            	oneplay.setPlay_path(resultSet.getString("play_path")); 
+            }else {
+            	return null;
+            }
+            
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }finally {
+            JDBC.close(conn,ps,resultSet);
+        }
+		return oneplay;
+	}
 }
