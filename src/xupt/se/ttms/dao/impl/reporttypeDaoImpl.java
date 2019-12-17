@@ -106,4 +106,24 @@ public class reporttypeDaoImpl implements IreporttypeDao {
             JDBC.close(conn, ps, resultSet);
         }
     }
+
+    @Override
+    public int getReportType(String type) {
+        Connection conn = JDBC.getConnection();
+        PreparedStatement ps = null;
+        ResultSet resultSet = null;
+        try {
+            ps = conn.prepareStatement("select reportType_id from reporttype where reportType_name=?");
+            ps.setString(1,type);
+            resultSet = ps.executeQuery();
+            resultSet.next();
+            int id = resultSet.getInt("reportType_id");
+            return id;
+        }catch (Exception e){
+            e.printStackTrace();
+            return -1;
+        }finally {
+            JDBC.close(conn, ps, resultSet);
+        }
+    }
 }

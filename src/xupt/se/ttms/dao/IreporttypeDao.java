@@ -18,4 +18,6 @@ public interface IreporttypeDao {
     List<Reporttype> getReportTypeAll();
 
     List<String> getReportByStatus();
+
+    int getReportType(String type);
 }

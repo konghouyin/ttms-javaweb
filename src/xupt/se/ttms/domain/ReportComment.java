@@ -10,7 +10,7 @@ public class ReportComment {
     String comment_message;
     String playname;
     String comment_time;
-    String type;
+    String type;//举报类型
 
     @Override
     public String toString() {

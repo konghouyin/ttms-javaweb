@@ -20,5 +20,8 @@ public class daoFactory {
 	public static IplayDao createPlayDao() {
 		return new playDaoImpl();
 	}
-	
+	public static IreportDao createReportDao(){
+		return new reportDaoImpl();
+	}
+
 }

@@ -20,5 +20,6 @@ public interface IcommentDao {
 
     List<Comment> getCommentAll();
 
+
 	List<Advancedcomment> getplaycomments(String playid);
 }

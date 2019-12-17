@@ -112,7 +112,7 @@ public class playDaoImpl implements IplayDao {
                 type.setPlay_language(resultSet.getString("play_language"));
                 type.setPlay_status(resultSet.getString("play_status")); 
                 type.setPlay_pic(resultSet.getString("play_pic")); 
-                type.setPlay_message(resultSet.getString("play_message")); 
+                type.setPlay_message(resultSet.getString("play_message"));
                 type.setPlay_link(resultSet.getString("play_link")); 
                 type.setPlay_path(resultSet.getString("play_path")); 
                 list.add(type);
