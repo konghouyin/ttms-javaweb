@@ -4,6 +4,8 @@ import xupt.se.ttms.dao.*;
 import xupt.se.ttms.domain.User;
 import xupt.se.ttms.factory.*;
 
+import java.util.List;
+
 public class userService {
 	private IuserDao userDao = daoFactory.createUserDao();
 
@@ -35,6 +37,14 @@ public class userService {
 		} else {
 			return null;
 			// 密码错误
+		}
+	}
+	public List<User> personquery(){
+		List<User> content=userDao.getUserAll();
+		if(content==null){
+			return null;
+		}else{
+			return content;
 		}
 	}
 }
