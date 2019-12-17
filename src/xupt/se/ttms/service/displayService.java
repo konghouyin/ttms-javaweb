@@ -3,6 +3,7 @@ package xupt.se.ttms.service;
 import java.util.List;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 
 import xupt.se.ttms.dao.IplayDao;
@@ -18,7 +19,6 @@ public class displayService {
 	public List<Play> getallplay() {
 		List<Play> plist = playDao.getPlayAll();
 		return plist;
-<<<<<<< HEAD
 	}
 
 	public JSONObject analysisPath(String path) {
@@ -66,12 +66,33 @@ public class displayService {
 		return playDao.playInsert(playObj);
 	}
 
-=======
-	} 
+	
+	public int addCommentByPath(String input,int play_id) {
+		JSONObject all = JSON.parseObject(input);
+		JSONTool jsonTool = new JSONTool(all);
+		JSONArray commentListArray = (JSONArray) jsonTool.getJSONObject("index.shortCommentary");
+		try {
+			commentService service = new commentService();
+    	
+			for(int i=0;i<10;i++) {
+				JSONObject itemJsonObject = commentListArray.getJSONObject(i);
+				String comment_msg = itemJsonObject.getString("message");
+				String grade = itemJsonObject.getString("star");
+				service.commentAdd(comment_msg, grade,play_id,1);
+			}
+			//最多爬10条
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		return 1;
+	}
+	
 	
 	public Play getoneplay(String playid) {
-		Play p =playDao.playGetByID(playid);
+		Play p =((playDaoImpl) playDao).playGetByID(playid);
 		return p;
 	}
->>>>>>> e3e5d4fc6cb5332627cbaf2d311a3b40b1abab13
+	
+	
+
 }

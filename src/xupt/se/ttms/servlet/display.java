@@ -24,6 +24,7 @@ public class display extends HttpServlet {
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		displayService playService = new displayService();
 		List<Play> alist=playService.getallplay();
+				
 		if (alist == null) {
 			backMessage JSONobj = new backMessage(-1, "数据库中无影片", null);
 			String aString = JSON.toJSONString(JSONobj);

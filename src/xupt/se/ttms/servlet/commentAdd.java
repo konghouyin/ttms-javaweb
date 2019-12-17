@@ -22,36 +22,22 @@ import java.util.Date;
  **/
 @WebServlet("/comment/add")
 public class commentAdd extends HttpServlet {
-    @Override
-    protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String comment_msg = req.getParameter("text");
-        String grade = req.getParameter("grade");
-        System.out.println(comment_msg);
-        System.out.println(grade);
-
-        Date date = new Date();
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-        //从前端或者自己模拟一个日期格式，转为String即可
-        String dateStr = format.format(date);
-        Comment comment = new Comment();
-
-
-        if("".equals(comment_msg)){
-            backMessage JSONobj = new backMessage(-1, "添加失败", "");
+	@Override
+	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		String comment_msg = req.getParameter("text");
+		String grade = req.getParameter("grade");
+		
+		if("".equals(comment_msg)){
+            backMessage JSONobj = new backMessage(-1, "评论内容为空", "");
             resp.getWriter().println(JSON.toJSONString(JSONobj));
         }else {
-            commentService service = new commentService();
-            comment.setUser_id(40);
-            comment.setComment_message(comment_msg);
-            comment.setComment_grade(Integer.valueOf(grade));
-            comment.setComment_status(1);
-            comment.setPlay_id(1);
-            comment.setComment_time(dateStr);
-            service.commentAdd(comment);
-            backMessage JSONobj = new backMessage(1, "添加成功", comment);
-            String aString = JSON.toJSONString(JSONobj);
-            System.out.println(aString);
-            resp.getWriter().println(aString);
+        	commentService service = new commentService();
+    		int comment = service.commentAdd(comment_msg, grade,1,40);
+    		//后期替换两个参数
+    		
+    		backMessage JSONobj = new backMessage(1, "添加成功", comment);
+    		String aString = JSON.toJSONString(JSONobj);
+    		resp.getWriter().println(aString);
         }
-    }
+	}
 }

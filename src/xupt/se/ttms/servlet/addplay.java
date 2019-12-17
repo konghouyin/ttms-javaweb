@@ -1,5 +1,6 @@
 package xupt.se.ttms.servlet;
 
+import java.io.Console;
 import java.io.IOException;
 
 import javax.servlet.ServletException;
@@ -41,12 +42,18 @@ public class addplay extends HttpServlet {
 
 		displayService display = new displayService();
 		int back = display.addPlay(path, name, type, director, performer, length, country, language, status, pic, link, comment, message);
-
-		if (back != 1) {
+		System.out.println(back);
+		
+		if(comment.equals("true") && back!=0) {
+			display.addCommentByPath(message,back);
+		}
+		
+		
+		if (back == 0) {
 			backMessage JSONobj = new backMessage(-1, "添加失败", null);
 			response.getWriter().println(JSON.toJSONString(JSONobj));
 		} else {
-			backMessage JSONobj = new backMessage(1, "添加成功", null);
+			backMessage JSONobj = new backMessage(1, "添加成功", 1);
 			response.getWriter().println(JSON.toJSONString(JSONobj));
 		}
 	}

@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,7 +22,7 @@ public class playDaoImpl implements IplayDao {
 		 Connection conn = JDBC.getConnection();
 	        PreparedStatement ps = null;
 	        try {
-	            ps = conn.prepareStatement("INSERT INTO play (play_name,play_director,play_performer,play_type,play_length,play_country,play_language,play_status,play_pic,play_message,play_link,play_path) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)");
+	            ps = conn.prepareStatement("INSERT INTO play (play_name,play_director,play_performer,play_type,play_length,play_country,play_language,play_status,play_pic,play_message,play_link,play_path) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)",Statement.RETURN_GENERATED_KEYS);
 	            ps.setString(1, play.getPlay_name());
 	            ps.setString(2, play.getPlay_director());
 	            ps.setString(3, play.getPlay_performer());
@@ -36,13 +37,18 @@ public class playDaoImpl implements IplayDao {
 	            ps.setString(12, play.getPlay_path());
 
 	            ps.executeUpdate();
+	            ResultSet rst = ps.getGeneratedKeys();
+	    		if (rst.next()) {
+	    			return rst.getInt(1);
+	    		}
+	            
 	        } catch (SQLException e) {
 	            e.printStackTrace();
 	            return 0;
 	        }finally {
 	            JDBC.close(conn,ps,null);
 	        }
-	        return 1;
+	        return 0;
 	}
 		
 	@Override
