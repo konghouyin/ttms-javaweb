@@ -65,19 +65,14 @@ public class commentDaoImpl implements IcommentDao {
     }
 
     @Override
-    public int commentUpdate(Comment comment) {
+    public int commentUpdate(int comment_id,int status) {
         Connection conn = JDBC.getConnection();
         PreparedStatement ps = null;
         try {
-            ps = conn.prepareStatement("update comment (play_id,user_id,comment_message,comment_time,comment_grade,comment_status,comment_dateout) VALUES (?,?,?,?,?,?,?) where comment_id=?");
-            ps.setInt(1,comment.getPlay_id());
-            ps.setInt(2, comment.getUser_id());
-            ps.setString(3,comment.getComment_message());
-            ps.setString(4,comment.getComment_time());
-            ps.setInt(5,comment.getComment_grade());
-            ps.setInt(6,comment.getComment_status());
-            ps.setInt(7,comment.getComment_dateout());
-            ps.setInt(8,comment.getComment_id());
+            ps = conn.prepareStatement("update comment set comment_status = ? where comment_id=?");
+            ps.setInt(1,status);
+            ps.setInt(2,comment_id);
+
             ps.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();

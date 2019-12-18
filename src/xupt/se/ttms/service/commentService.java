@@ -51,4 +51,9 @@ public class commentService {
 		int i = commentDao.commentDelete(comment_id);
 		return i;
 	}
+
+	public int overdule(int comment_id,int status){
+		commentDao.commentUpdate(comment_id,status);
+		return 1;
+	}
 }

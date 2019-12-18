@@ -16,10 +16,11 @@ public interface IcommentDao {
 
     int commentDelete(int comment_id);
 
-    int commentUpdate(Comment comment);
 
     List<Comment> getCommentAll();
 
 
 	List<Advancedcomment> getplaycomments(String playid);
+
+	int commentUpdate(int comment_id,int status);
 }

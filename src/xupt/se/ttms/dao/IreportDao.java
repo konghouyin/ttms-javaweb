@@ -17,7 +17,7 @@ public interface IreportDao {
 
     int reportDelete(int report_id);
 
-    int reportUpdate(Report report);
+    int reportUpdate(int comment_id);
 
     List<Report> getReportAll();
 

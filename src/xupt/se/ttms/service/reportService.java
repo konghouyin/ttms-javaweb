@@ -65,4 +65,9 @@ public class reportService {
         List<ReportComment> commentReport = reportDao.getCommentReport();
         return commentReport;
     }
+
+    public int StatusModify(int comment_id){
+        int i = reportDao.reportUpdate(comment_id);
+        return i;
+    }
 }

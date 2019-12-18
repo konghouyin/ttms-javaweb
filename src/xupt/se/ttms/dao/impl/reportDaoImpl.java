@@ -60,25 +60,19 @@ public class reportDaoImpl implements IreportDao {
     }
 
     @Override
-    public int reportUpdate(Report report) {
+    public int reportUpdate(int comment_id) {
         Connection conn = JDBC.getConnection();
         PreparedStatement ps = null;
-        try {
-            ps = conn.prepareStatement("update report (comment_id,user_id,report_typeId,report_main,report_status) VALUES (?,?,?,?,?) where report_id=?");
-            ps.setInt(1,report.getComment_id());
-            ps.setInt(2,report.getUser_id());
-            ps.setInt(3,report.getReport_typeId());
-            ps.setString(4,report.getReport_main());
-            ps.setInt(5,report.getReprot_status());
-            ps.setInt(6,report.getReport_id());
+
+        try{
+            ps = conn.prepareStatement("update report set report_status=2 where comment_id=?");
+            ps.setInt(1,comment_id);
             ps.executeUpdate();
-        } catch (SQLException e) {
+            return 1;
+        }catch (Exception e){
             e.printStackTrace();
             return 0;
-        }finally {
-            JDBC.close(conn,ps,null);
         }
-        return 1;
     }
 
     @Override
@@ -120,7 +114,7 @@ public class reportDaoImpl implements IreportDao {
         PreparedStatement ps = null;
         ResultSet resultSet = null;
         try {
-            ps = conn.prepareStatement("select user.user_name,play.play_name,comment.comment_time,comment.comment_id,reporttype.reportType_name,comment.comment_message from user,play,comment,report,reporttype where comment.comment_status=2 report.comment_id=comment.comment_id and report.report_typeId=reporttype.reportType_id and comment.user_id=user.user_id and comment.play_id=play.play_id");
+            ps = conn.prepareStatement("select user.user_name,play.play_name,comment.comment_time,comment.comment_id,reporttype.reportType_name,comment.comment_message from user,play,comment,report,reporttype where comment.comment_status=2 and report.comment_id=comment.comment_id and report.report_typeId=reporttype.reportType_id and comment.user_id=user.user_id and comment.play_id=play.play_id and report.report_status=1");
 //            ps.setInt(1,reportType_id);
             resultSet = ps.executeQuery();
             List<ReportComment> list = new ArrayList<ReportComment>();
