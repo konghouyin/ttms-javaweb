@@ -26,8 +26,11 @@ public class select extends HttpServlet {
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("select");
 		userMService Messselect = new userMService();
-		String userid = (String) request.getSession().getAttribute("userId");
+		String userid = String.valueOf( request.getSession().getAttribute("userId"));
 		System.out.println(userid);
+		
+		
+		
 		User people = Messselect.userGetById(userid);
 		System.out.println(people);
 		

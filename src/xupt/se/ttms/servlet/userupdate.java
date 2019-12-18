@@ -34,7 +34,7 @@ public class userupdate extends HttpServlet {
 		System.out.println(userName);
 		usermodify UserService = new usermodify();
 		User person = new User();
-		String userid = (String) request.getSession().getAttribute("userId");
+		String userid = String.valueOf( request.getSession().getAttribute("userId"));
 		User p = UserService.userGetById(userid);
 		int sex = p.getUser_sex();
 		int age = p.getUser_age();

@@ -37,7 +37,7 @@ public class usermessage extends HttpServlet {
 		int sex = Integer.parseInt(resource);
 		int userage = Integer.parseInt(age);
 		User person = new User();
-		String userid = (String) request.getSession().getAttribute("userId");
+		String userid = String.valueOf( request.getSession().getAttribute("userId"));
 		int user_id = Integer.parseInt(userid);
 		User p = MessService.userGetById(userid);
 		String status = p.getUser_status();
