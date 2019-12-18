@@ -2,6 +2,7 @@ package xupt.se.ttms.dao;
 
 import xupt.se.ttms.domain.Advancedcomment;
 import xupt.se.ttms.domain.Comment;
+import xupt.se.ttms.domain.ReportComment;
 
 import java.util.List;
 
@@ -18,6 +19,7 @@ public interface IcommentDao {
     int commentUpdate(Comment comment);
 
     List<Comment> getCommentAll();
+
 
 	List<Advancedcomment> getplaycomments(String playid);
 }

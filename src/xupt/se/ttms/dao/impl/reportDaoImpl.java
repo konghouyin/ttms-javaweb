@@ -2,6 +2,7 @@ package xupt.se.ttms.dao.impl;
 
 import xupt.se.ttms.dao.IreportDao;
 import xupt.se.ttms.domain.Report;
+import xupt.se.ttms.domain.ReportComment;
 import xupt.se.ttms.util.JDBCConnect;
 import xupt.se.ttms.util.JDBCMysqlConnectImpl;
 
@@ -102,6 +103,38 @@ public class reportDaoImpl implements IreportDao {
                 type.setReport_typeId(resultSet.getInt("report_typeId"));
                 type.setReport_main(resultSet.getString("report_main"));
                 type.setReprot_status(resultSet.getInt("report_status"));
+                list.add(type);
+            }
+            return list;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        } finally {
+            JDBC.close(conn, ps, resultSet);
+        }
+    }
+
+    @Override
+    public List<ReportComment> getCommentReport() {
+        Connection conn = JDBC.getConnection();
+        PreparedStatement ps = null;
+        ResultSet resultSet = null;
+        try {
+            ps = conn.prepareStatement("select user.user_name,play.play_name,comment.comment_time,comment.comment_id,reporttype.reportType_name,comment.comment_message from user,play,comment,report,reporttype where comment.comment_status=2 report.comment_id=comment.comment_id and report.report_typeId=reporttype.reportType_id and comment.user_id=user.user_id and comment.play_id=play.play_id");
+//            ps.setInt(1,reportType_id);
+            resultSet = ps.executeQuery();
+            List<ReportComment> list = new ArrayList<ReportComment>();
+            while (resultSet.next()) {
+                ReportComment type = new ReportComment();
+//                stu.setName(res.getString("name"));
+//                stu.setAge(res.getInt("age"));
+//                stu.setId(res.getInt("id"));
+                type.setUsername(resultSet.getString("user_name"));
+                type.setPlayname(resultSet.getString("play_name"));
+                type.setComment_time(resultSet.getString("comment_time"));
+                type.setType(resultSet.getString("reportType_name"));
+                type.setComment_message(resultSet.getString("comment_message"));
+                type.setComment_id(resultSet.getInt("comment_id"));
                 list.add(type);
             }
             return list;

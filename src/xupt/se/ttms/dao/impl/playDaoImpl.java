@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,7 +22,7 @@ public class playDaoImpl implements IplayDao {
 		 Connection conn = JDBC.getConnection();
 	        PreparedStatement ps = null;
 	        try {
-	            ps = conn.prepareStatement("INSERT INTO play (play_name,play_director,play_performer,play_type,play_length,play_country,play_language,play_status,play_pic,play_message,play_link,play_path) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)");
+	            ps = conn.prepareStatement("INSERT INTO play (play_name,play_director,play_performer,play_type,play_length,play_country,play_language,play_status,play_pic,play_message,play_link,play_path) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)",Statement.RETURN_GENERATED_KEYS);
 	            ps.setString(1, play.getPlay_name());
 	            ps.setString(2, play.getPlay_director());
 	            ps.setString(3, play.getPlay_performer());
@@ -36,13 +37,18 @@ public class playDaoImpl implements IplayDao {
 	            ps.setString(12, play.getPlay_path());
 
 	            ps.executeUpdate();
+	            ResultSet rst = ps.getGeneratedKeys();
+	    		if (rst.next()) {
+	    			return rst.getInt(1);
+	    		}
+	            
 	        } catch (SQLException e) {
 	            e.printStackTrace();
 	            return 0;
 	        }finally {
 	            JDBC.close(conn,ps,null);
 	        }
-	        return 1;
+	        return 0;
 	}
 		
 	@Override
@@ -67,20 +73,20 @@ public class playDaoImpl implements IplayDao {
 		Connection conn = JDBC.getConnection();
         PreparedStatement ps = null;
         try {
-            ps = conn.prepareStatement("update paly (play_id,play_name,play_director,play_performer,play_type,play_length,play_country,play_language,play_status,play_pic,play_message,play_link,play_path) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?) where user_id=?");
-            ps.setInt(1, play.getPlay_id());
-            ps.setString(2, play.getPlay_name());
-            ps.setString(3, play.getPlay_director());
-            ps.setString(4, play.getPlay_performer());
-            ps.setString(5, play.getPlay_type());
-            ps.setString(6, play.getPlay_length());
-            ps.setString(7, play.getPlay_country());
-            ps.setString(8, play.getPlay_language());
-            ps.setString(9, play.getPlay_status());
-            ps.setString(10, play.getPlay_pic());
-            ps.setString(11, play.getPlay_message());
-            ps.setString(12, play.getPlay_link());
-            ps.setString(13, play.getPlay_path());
+            ps = conn.prepareStatement("update play set play_name=?,play_director=?,play_performer=?,play_type=?,play_length=?,play_country=?,play_language=?,play_status=?,play_pic=?,play_message=?,play_link=?,play_path=? where play_id=?");
+            ps.setString(1, play.getPlay_name());
+            ps.setString(2, play.getPlay_director());
+            ps.setString(3, play.getPlay_performer());
+            ps.setString(4, play.getPlay_type());
+            ps.setString(5, play.getPlay_length());
+            ps.setString(6, play.getPlay_country());
+            ps.setString(7, play.getPlay_language());
+            ps.setString(8, play.getPlay_status());
+            ps.setString(9, play.getPlay_pic());
+            ps.setString(10, play.getPlay_message());
+            ps.setString(11, play.getPlay_link());
+            ps.setString(12, play.getPlay_path());
+            ps.setInt(13, play.getPlay_id());
             ps.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -112,7 +118,7 @@ public class playDaoImpl implements IplayDao {
                 type.setPlay_language(resultSet.getString("play_language"));
                 type.setPlay_status(resultSet.getString("play_status")); 
                 type.setPlay_pic(resultSet.getString("play_pic")); 
-                type.setPlay_message(resultSet.getString("play_message")); 
+                type.setPlay_message(resultSet.getString("play_message"));
                 type.setPlay_link(resultSet.getString("play_link")); 
                 type.setPlay_path(resultSet.getString("play_path")); 
                 list.add(type);

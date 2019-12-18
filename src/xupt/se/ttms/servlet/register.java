@@ -25,6 +25,8 @@ public class register extends HttpServlet {
 			String aString = JSON.toJSONString(JSONobj);
 			response.getWriter().println(aString);
 		} else {
+			request.getSession().setAttribute("userId", backUser.getUser_id());
+			request.getSession().setAttribute("userStatus", backUser.getUser_status());
 			backMessage JSONobj = new backMessage(1, "注册成功", backUser);
 			String aString = JSON.toJSONString(JSONobj);
 			response.getWriter().println(aString);
