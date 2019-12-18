@@ -26,16 +26,20 @@ public class AccessOrigin implements Filter {
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
 			throws IOException, ServletException {
 		((HttpServletResponse) response).setCharacterEncoding("UTF-8");
-		String origin = config.getInitParameter("origin");
 		((HttpServletRequest) request).setCharacterEncoding("UTF-8");
+		
+		String origin = config.getInitParameter("origin");
 		((HttpServletResponse) response).setHeader("Access-Control-Allow-Origin", origin);
+		((HttpServletResponse) response).setHeader("Access-Control-Allow-Credentials", "true");
 		((HttpServletResponse) response).setHeader("Access-Control-Allow-Methods", "POST,GET,OPTIONS");
 		((HttpServletResponse) response).setHeader("Access-Control-Allow-Headers", "Content-type");
 		((HttpServletResponse) response).setHeader("Content-type","application/json");
 		chain.doFilter(request, response);
-		
-		
-		
+
+	}
+
+	@Override
+	public void destroy() {
 	}
 
 }

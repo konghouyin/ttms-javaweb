@@ -16,4 +16,12 @@ public class daoFactory {
 	public static IcommentDao createCommentDao() {
 	    return new commentDaoImpl();
 	}
+	
+	public static IplayDao createPlayDao() {
+		return new playDaoImpl();
+	}
+	public static IreportDao createReportDao(){
+		return new reportDaoImpl();
+	}
+
 }

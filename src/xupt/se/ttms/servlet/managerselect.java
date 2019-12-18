@@ -13,9 +13,7 @@ import xupt.se.ttms.domain.User;
 import xupt.se.ttms.domain.backMessage;
 import xupt.se.ttms.service.usermodify;
 
-/**
- * Servlet implementation class managerselect
- */
+
 @WebServlet("/managerselect")
 public class managerselect extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -23,7 +21,8 @@ public class managerselect extends HttpServlet {
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("managerselect");
 		usermodify Messselect = new usermodify();
-		User people = Messselect.userGetById("40");
+		String userid = (String) request.getSession().getAttribute("userId");
+		User people = Messselect.userGetById(userid);
 		System.out.println(people);
 		
 		backMessage JSONobj1 = new backMessage(1, "查询成功", people);
