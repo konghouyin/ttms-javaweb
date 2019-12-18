@@ -29,14 +29,14 @@ public class commentDaoImpl implements IcommentDao {
         Connection conn = JDBC.getConnection();
         PreparedStatement ps = null;
         try {
-            ps = conn.prepareStatement("INSERT INTO comment (play_id,user_id,comment_message,comment_time,comment_grade,comment_status,comment_dateout) VALUES (?,?,?,?,?,?,?)");
+            ps = conn.prepareStatement("INSERT INTO comment (play_id,user_id,comment_message,comment_time,comment_grade,comment_status,comment_dateout) VALUES (?,?,?,NOW(),?,?,?)");
             ps.setInt(1,comment.getPlay_id());
             ps.setInt(2, comment.getUser_id());
             ps.setString(3,comment.getComment_message());
-            ps.setString(4,comment.getComment_time());
-            ps.setInt(5,comment.getComment_grade());
-            ps.setInt(6,comment.getComment_status());
-            ps.setInt(7,-1);
+
+            ps.setInt(4,comment.getComment_grade());
+            ps.setInt(5,comment.getComment_status());
+            ps.setInt(6,-1);
             ps.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
