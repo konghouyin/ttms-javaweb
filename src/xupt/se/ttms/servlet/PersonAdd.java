@@ -1,7 +1,6 @@
 package xupt.se.ttms.servlet;
 
 import java.io.IOException;
-import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -14,21 +13,26 @@ import xupt.se.ttms.domain.User;
 import xupt.se.ttms.domain.backMessage;
 import xupt.se.ttms.service.userService;
 
-@WebServlet("/PersonQuery")
-public class PersonQuery extends HttpServlet {
+@WebServlet("/PersonAdd")
+public class PersonAdd extends HttpServlet {
     private static final long serialVersionUID = 2L;
 
     protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        userService registerService = new userService();
-        List<User> backUser1 = registerService.personquery();
-        System.out.println(backUser1);
+        String userName = request.getParameter("username");
+        String password = request.getParameter("pass");
+        String phemail=request.getParameter("phemail");
+        String status=request.getParameter("status");
 
-        if (backUser1 == null) {
-            backMessage JSONobj = new backMessage(-1, "人员信息为空", null);
+        System.out.println(userName);
+        userService registerService = new userService();
+        User backUser = registerService.personadd(userName, password,phemail,status);
+
+        if (backUser == null) {
+            backMessage JSONobj = new backMessage(-1, "添加成功", null);
             System.out.println(JSON.toJSONString(JSONobj));
             response.getWriter().println(JSON.toJSONString(JSONobj));
         } else {
-            backMessage JSONobj = new backMessage(1, "人员信息查询成功", backUser1);
+            backMessage JSONobj = new backMessage(1, "添加失败", backUser);
             response.getWriter().println(JSON.toJSONString(JSONobj));
 
         }

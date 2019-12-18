@@ -47,4 +47,13 @@ public class userService {
 			return content;
 		}
 	}
+	public User personadd(String userName,String password,String pelmail,String status){
+		User person=new User();
+		person.setUser_name(userName);
+		person.setUser_password(password);
+		person.setUser_mail(pelmail);
+		person.setUser_status(status);
+		int adc=userDao.userInsert1(person);
+		return person;
+	}
 }

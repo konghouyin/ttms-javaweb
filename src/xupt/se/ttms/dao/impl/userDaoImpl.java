@@ -32,6 +32,25 @@ public class userDaoImpl implements IuserDao{
         }
         return 1;
     }
+    public int userInsert1(User user) {
+        Connection conn = JDBC.getConnection();
+        PreparedStatement ps = null;
+        try {
+            ps = conn.prepareStatement("INSERT INTO user (user_name,user_password,user_mail,user_status) VALUES (?,?,?,?)");
+            ps.setString(1, user.getUser_name());
+            ps.setString(2, user.getUser_password());
+            ps.setString(3,user.getUser_mail());
+            ps.setString(4,user.getUser_status());
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return 0;
+        }finally {
+            JDBC.close(conn,ps,null);
+        }
+        return 1;
+    }
+
 	
     public int userDelete(int user_id) {
     	Connection conn = JDBC.getConnection();

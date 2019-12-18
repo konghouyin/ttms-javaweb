@@ -15,4 +15,6 @@ public interface IuserDao {
 	 User userGetByName(User user);
 
 	 List<User> getUserAll();
+
+	int userInsert1(User person);
 }
