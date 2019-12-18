@@ -39,7 +39,7 @@ public class reportAddServlet extends HttpServlet {
             System.out.println(reportTypeId);
 
             int i = service.addReport(Integer.valueOf(comment_id), userid, reportTypeId, msg, 1);
-            System.out.println(i);
+
             commentService.update(Integer.valueOf(comment_id));
             backMessage JSONobj = new backMessage(1, "举报添加成功", "1");
             String aString = JSON.toJSONString(JSONobj);
