@@ -152,7 +152,8 @@ public class cinemaDaoImpl implements IcinemaDao{
             resultSet = ps.executeQuery();
             List<Seat> list = new ArrayList<Seat>();
             while (resultSet.next()) {
-                Seat type = new Seat();              
+                Seat type = new Seat();  
+                type.setSeat_id(resultSet.getInt("Seat_id"));
                 type.setSeat_row(resultSet.getInt("Seat_row"));
                 type.setSeat_col(resultSet.getInt("Seat_col"));
                 type.setSeat_status(resultSet.getInt("Seat_status"));               
