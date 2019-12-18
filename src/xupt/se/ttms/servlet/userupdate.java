@@ -34,14 +34,19 @@ public class userupdate extends HttpServlet {
 		System.out.println(userName);
 		usermodify UserService = new usermodify();
 		User person = new User();
-		//person.setUser_id((Integer) request.getSession().getAttribute("userId"));
-		person.setUser_id((40));
+		String userid = (String) request.getSession().getAttribute("userId");
+		User p = UserService.userGetById(userid);
+		int sex = p.getUser_sex();
+		int age = p.getUser_age();
+		String mail = p.getUser_mail();
+		int user_id = Integer.parseInt(userid);
+		person.setUser_id(user_id);
 		person.setUser_name(userName);
 		person.setUser_password(password);
 		person.setUser_tel(tel);
-		person.setUser_sex((2));
-		person.setUser_mail(("1231"));
-		person.setUser_age((123));
+		person.setUser_sex(sex);
+		person.setUser_mail(mail);
+		person.setUser_age(age);
 		person.setUser_status(status);
 		UserService.userUpdate(person);
 		

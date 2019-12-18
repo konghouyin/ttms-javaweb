@@ -26,7 +26,9 @@ public class select extends HttpServlet {
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("select");
 		userMService Messselect = new userMService();
-		User people = Messselect.userGetById("40");
+		String userid = (String) request.getSession().getAttribute("userId");
+		System.out.println(userid);
+		User people = Messselect.userGetById(userid);
 		System.out.println(people);
 		
 		backMessage JSONobj1 = new backMessage(1, "查询成功", people);

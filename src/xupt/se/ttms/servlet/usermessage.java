@@ -37,11 +37,14 @@ public class usermessage extends HttpServlet {
 		int sex = Integer.parseInt(resource);
 		int userage = Integer.parseInt(age);
 		User person = new User();
-		//person.setUser_id((Integer) request.getSession().getAttribute("userId"));
-		person.setUser_id((40));
+		String userid = (String) request.getSession().getAttribute("userId");
+		int user_id = Integer.parseInt(userid);
+		User p = MessService.userGetById(userid);
+		String status = p.getUser_status();
+		person.setUser_id(user_id);
 		person.setUser_name(userName);
 		person.setUser_sex(sex);
-		person.setUser_status("1");
+		person.setUser_status(status);
 		person.setUser_tel(tel);
 		person.setUser_mail(email);
 		person.setUser_age(userage);
@@ -52,4 +55,7 @@ public class usermessage extends HttpServlet {
 		response.getWriter().println(aString);
 		
 	}
+
+
+	
 }
