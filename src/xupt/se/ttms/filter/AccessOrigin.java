@@ -36,10 +36,12 @@ public class AccessOrigin implements Filter {
 		((HttpServletResponse) response).setHeader("Content-type","application/json");
 		chain.doFilter(request, response);
 
+
 	}
 
 	@Override
 	public void destroy() {
+
 	}
 
 }

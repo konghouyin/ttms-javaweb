@@ -1,7 +1,9 @@
 package xupt.se.ttms.dao;
 
 import xupt.se.ttms.domain.Report;
+
 import xupt.se.ttms.domain.ReportComment;
+
 
 import java.util.List;
 
@@ -22,4 +24,6 @@ public interface IreportDao {
     List<Report> getReportAll();
 
     List<ReportComment> getCommentReport();
+
+
 }

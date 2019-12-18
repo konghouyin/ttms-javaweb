@@ -1,11 +1,9 @@
 package xupt.se.ttms.dao.impl;
 
 import xupt.se.ttms.dao.IcommentDao;
+
 import xupt.se.ttms.domain.Advancedcomment;
 import xupt.se.ttms.domain.Comment;
-import xupt.se.ttms.domain.Report;
-import xupt.se.ttms.domain.ReportComment;
-import xupt.se.ttms.domain.Play;
 import xupt.se.ttms.util.JDBCConnect;
 import xupt.se.ttms.util.JDBCMysqlConnectImpl;
 
@@ -29,11 +27,11 @@ public class commentDaoImpl implements IcommentDao {
         Connection conn = JDBC.getConnection();
         PreparedStatement ps = null;
         try {
+
             ps = conn.prepareStatement("INSERT INTO comment (play_id,user_id,comment_message,comment_time,comment_grade,comment_status,comment_dateout) VALUES (?,?,?,NOW(),?,?,?)");
             ps.setInt(1,comment.getPlay_id());
             ps.setInt(2, comment.getUser_id());
             ps.setString(3,comment.getComment_message());
-
             ps.setInt(4,comment.getComment_grade());
             ps.setInt(5,comment.getComment_status());
             ps.setInt(6,-1);
@@ -90,7 +88,6 @@ public class commentDaoImpl implements IcommentDao {
 
     @Override
     public List<Comment> getCommentAll() {
-    	System.out.println("getCommentAll");
         Connection conn = JDBC.getConnection();
         PreparedStatement ps = null;
         ResultSet resultSet = null;
@@ -122,6 +119,7 @@ public class commentDaoImpl implements IcommentDao {
             JDBC.close(conn, ps, resultSet);
         }
     }
+
 
 
 	@Override

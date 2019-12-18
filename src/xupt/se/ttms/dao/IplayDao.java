@@ -15,4 +15,5 @@ public interface IplayDao {
 	 List<Play> getPlayAll();
 	 
 	 Play playGetByID(String playid);
+
 }

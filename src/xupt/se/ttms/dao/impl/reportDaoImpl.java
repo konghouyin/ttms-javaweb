@@ -2,7 +2,9 @@ package xupt.se.ttms.dao.impl;
 
 import xupt.se.ttms.dao.IreportDao;
 import xupt.se.ttms.domain.Report;
+
 import xupt.se.ttms.domain.ReportComment;
+
 import xupt.se.ttms.util.JDBCConnect;
 import xupt.se.ttms.util.JDBCMysqlConnectImpl;
 
@@ -113,6 +115,7 @@ public class reportDaoImpl implements IreportDao {
             JDBC.close(conn, ps, resultSet);
         }
     }
+
 
     @Override
     public List<ReportComment> getCommentReport() {

@@ -12,11 +12,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * @program: ttms-javaweb
- * @author: WolfSky
- * @create: 2019-11-06 10:46
- **/
+
 public class reporttypeDaoImpl implements IreporttypeDao {
 
     private JDBCConnect JDBC= new JDBCMysqlConnectImpl();
@@ -25,7 +21,7 @@ public class reporttypeDaoImpl implements IreporttypeDao {
         Connection conn = JDBC.getConnection();
         PreparedStatement ps = null;
         try {
-            ps = conn.prepareStatement("INSERT INTO reporttype (reportType_name,reportType_status) VALUES (?,?)");
+            ps = conn.prepareStatement("INSERT INTO reporttype (reportType_id,reportType_name,reportType_status) VALUES ('1',?,?)");
             ps.setString(1,reporttype.getReportType_name());
             ps.setInt(2, reporttype.getReportType_status());
             ps.executeUpdate();
@@ -39,12 +35,14 @@ public class reporttypeDaoImpl implements IreporttypeDao {
     }
 
     @Override
+
     public int reporttypeDelete(String reportType_id) {
         Connection conn = JDBC.getConnection();
         PreparedStatement ps = null;
         try {
             ps = conn.prepareStatement("update reporttype set reportType_status=2 where reportType_name=?");
             ps.setString(1,reportType_id);
+
             ps.executeUpdate();
         }catch (Exception e){
             e.printStackTrace();
@@ -126,4 +124,5 @@ public class reporttypeDaoImpl implements IreporttypeDao {
             JDBC.close(conn, ps, resultSet);
         }
     }
+
 }

@@ -22,6 +22,7 @@ public class userDaoImpl implements IuserDao{
             ps = conn.prepareStatement("INSERT INTO user (user_status,user_name,user_password,user_time) VALUES ('1',?,?,NOW())");
             ps.setString(1, user.getUser_name());
             ps.setString(2, user.getUser_password());
+
             ps.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -31,6 +32,25 @@ public class userDaoImpl implements IuserDao{
         }
         return 1;
     }
+    public int userInsert1(User user) {
+        Connection conn = JDBC.getConnection();
+        PreparedStatement ps = null;
+        try {
+            ps = conn.prepareStatement("INSERT INTO user (user_name,user_password,user_mail,user_status,user_time) VALUES (?,?,?,?,NOW())");
+            ps.setString(1, user.getUser_name());
+            ps.setString(2, user.getUser_password());
+            ps.setString(3,user.getUser_mail());
+            ps.setString(4,user.getUser_status());
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return 0;
+        }finally {
+            JDBC.close(conn,ps,null);
+        }
+        return 1;
+    }
+
 	
     public int userDelete(int user_id) {
     	Connection conn = JDBC.getConnection();
@@ -48,6 +68,7 @@ public class userDaoImpl implements IuserDao{
         return 1;
     } 
     
+
     public User userGetById(String user_id) {
     	Connection conn = JDBC.getConnection();
         PreparedStatement ps = null;
@@ -78,10 +99,12 @@ public class userDaoImpl implements IuserDao{
         }
         return person;
     }
+
     public int userUpdate(User user) {
         Connection conn = JDBC.getConnection();
         PreparedStatement ps = null;
         try {
+
             ps = conn.prepareStatement("update user set user_status = ?,user_name = ?,user_age = ?,user_sex = ?,user_tel = ?,user_mail = ? where user_id=?");
            
             ps.setString(1, user.getUser_status());
@@ -91,6 +114,7 @@ public class userDaoImpl implements IuserDao{
             ps.setString(5,user.getUser_tel());
             ps.setString(6,user.getUser_mail());
             ps.setInt(7,user.getUser_id());
+
             ps.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();

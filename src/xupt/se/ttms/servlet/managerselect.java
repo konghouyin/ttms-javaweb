@@ -20,9 +20,10 @@ public class managerselect extends HttpServlet {
        
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("managerselect");
+		String userId = request.getParameter("userid");
+		System.out.println(userId);
 		usermodify Messselect = new usermodify();
-		String userid = String.valueOf( request.getSession().getAttribute("userId"));
-		User people = Messselect.userGetById(userid);
+		User people = Messselect.userGetById(userId);
 		System.out.println(people);
 		
 		backMessage JSONobj1 = new backMessage(1, "查询成功", people);

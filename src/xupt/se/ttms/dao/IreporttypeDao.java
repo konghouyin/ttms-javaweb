@@ -12,12 +12,16 @@ import xupt.se.ttms.domain.Reporttype;
 public interface IreporttypeDao {
     //增删查
     int reporttypeInsert(Reporttype reporttype);
+    
+    int reporttypeDelete(String reportType_id);
 
-    int reporttypeDelete(String rListtType_id);
 
     List<Reporttype> getReportTypeAll();
 
     List<String> getReportByStatus();
 
     int getReportType(String type);
+
+
+
 }
