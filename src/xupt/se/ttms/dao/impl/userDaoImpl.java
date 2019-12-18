@@ -36,7 +36,7 @@ public class userDaoImpl implements IuserDao{
         Connection conn = JDBC.getConnection();
         PreparedStatement ps = null;
         try {
-            ps = conn.prepareStatement("INSERT INTO user (user_name,user_password,user_mail,user_status) VALUES (?,?,?,?)");
+            ps = conn.prepareStatement("INSERT INTO user (user_name,user_password,user_mail,user_status,user_time) VALUES (?,?,?,?,NOW())");
             ps.setString(1, user.getUser_name());
             ps.setString(2, user.getUser_password());
             ps.setString(3,user.getUser_mail());
