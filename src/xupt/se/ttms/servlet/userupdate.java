@@ -8,48 +8,47 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.alibaba.fastjson.JSON;
-import com.sun.xml.internal.ws.wsdl.writer.document.Service;
 
 import xupt.se.ttms.domain.User;
 import xupt.se.ttms.domain.backMessage;
-import xupt.se.ttms.service.userMService;
-
+import xupt.se.ttms.service.usermodify;
 
 /**
- * Servlet implementation class usermessage
+ * Servlet implementation class userupdate
  */
-@WebServlet("/usermessage")
-public class usermessage extends HttpServlet {
+@WebServlet("/usermodify")
+public class userupdate extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-    
-	
+       
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		
-			
+		
 		String userName = request.getParameter("username");
-		String resource = request.getParameter("sex");
+		String password = request.getParameter("password");
 		String tel = request.getParameter("tel");
-		String email = request.getParameter("email");
-		String age = request.getParameter("age");
+		String status = request.getParameter("status");
 		System.out.println(userName);
-		userMService MessService = new userMService();
-		int sex = Integer.parseInt(resource);
-		int userage = Integer.parseInt(age);
+		usermodify UserService = new usermodify();
 		User person = new User();
 		//person.setUser_id((Integer) request.getSession().getAttribute("userId"));
 		person.setUser_id((40));
 		person.setUser_name(userName);
-		person.setUser_sex(sex);
-		person.setUser_status("1");
+		person.setUser_password(password);
 		person.setUser_tel(tel);
-		person.setUser_mail(email);
-		person.setUser_age(userage);
-		MessService.userUpdate(person);
+		person.setUser_sex((2));
+		person.setUser_mail(("1231"));
+		person.setUser_age((123));
+		person.setUser_status(status);
+		UserService.userUpdate(person);
 		
 		backMessage JSONobj = new backMessage(1, "修改成功", person);
 		String aString = JSON.toJSONString(JSONobj);
 		response.getWriter().println(aString);
 		
 	}
+
 }

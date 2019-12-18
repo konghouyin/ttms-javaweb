@@ -48,6 +48,36 @@ public class userDaoImpl implements IuserDao{
         return 1;
     } 
     
+    public User userGetById(String user_id) {
+    	Connection conn = JDBC.getConnection();
+        PreparedStatement ps = null;
+        ResultSet resultSet = null;
+        User person = new User();
+        try {
+            ps = conn.prepareStatement("SELECT * FROM user WHERE user_id=?");
+            ps.setString(1,user_id); 
+            resultSet = ps.executeQuery();
+            if(resultSet.next()) {
+            	person.setUser_id(resultSet.getInt("user_id"));
+                person.setUser_status(resultSet.getString("user_status"));
+                person.setUser_password(resultSet.getString("user_password"));
+                person.setUser_name(resultSet.getString("user_name"));
+                person.setUser_age(resultSet.getInt("user_age"));
+                person.setUser_sex(resultSet.getInt("user_sex"));
+                person.setUser_tel(resultSet.getString("user_tel"));
+                person.setUser_mail(resultSet.getString("user_mail"));
+                person.setUser_time(resultSet.getString("user_time"));
+            }else {
+            	return null;
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+            return null;
+        }finally {
+            JDBC.close(conn,ps,resultSet);
+        }
+        return person;
+    }
     public int userUpdate(User user) {
         Connection conn = JDBC.getConnection();
         PreparedStatement ps = null;

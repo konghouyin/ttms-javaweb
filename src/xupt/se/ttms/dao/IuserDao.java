@@ -13,6 +13,7 @@ public interface IuserDao {
 	 int userUpdate(User user);
 	 
 	 User userGetByName(User user);
-
+	 
+	 User userGetById(String user_id);
 	 List<User> getUserAll();
 }
