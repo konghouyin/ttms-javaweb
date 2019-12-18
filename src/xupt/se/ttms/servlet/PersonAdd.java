@@ -28,11 +28,11 @@ public class PersonAdd extends HttpServlet {
         User backUser = registerService.personadd(userName, password,phemail,status);
 
         if (backUser == null) {
-            backMessage JSONobj = new backMessage(-1, "添加成功", null);
+            backMessage JSONobj = new backMessage(-1, "添加失败", null);
             System.out.println(JSON.toJSONString(JSONobj));
             response.getWriter().println(JSON.toJSONString(JSONobj));
         } else {
-            backMessage JSONobj = new backMessage(1, "添加失败", backUser);
+            backMessage JSONobj = new backMessage(1, "添加成功", backUser);
             response.getWriter().println(JSON.toJSONString(JSONobj));
 
         }
