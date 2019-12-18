@@ -36,22 +36,22 @@ public class addplay extends HttpServlet {
 		String pic = request.getParameter("pic");
 		String link = request.getParameter("link");
 		String comment = request.getParameter("comment");
-		
+
 		displayService playService = new displayService();
 		Object pathDataObject = playService.analysisPath(path);
 		String message = "";
-		if ((boolean) pathDataObject) {
+		if (pathDataObject != null) {
 			message = pathDataObject.toString();
 		}
 
-		int back = playService.addPlay(path, name, type, director, performer, length, country, language, status, pic, link, comment, message);
+		int back = playService.addPlay(path, name, type, director, performer, length, country, language, status, pic,
+				link, comment, message);
 		System.out.println(back);
-		
-		if(comment.equals("true") && back!=0 && message.length()>500) {
-			playService.addCommentByPath(message,back);
+
+		if (comment.equals("true") && back != 0 && message.length() > 500) {
+			playService.addCommentByPath(message, back);
 		}
-		
-		
+
 		if (back == 0) {
 			backMessage JSONobj = new backMessage(-1, "影片添加失败", null);
 			response.getWriter().println(JSON.toJSONString(JSONobj));
