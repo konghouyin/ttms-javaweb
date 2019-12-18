@@ -57,8 +57,8 @@ public class reportService {
         report.setReport_main(msg);
         report.setReprot_status(i);
 
-        reportDao.reportInsert(report);
-        return 1;
+        int i1 = reportDao.reportInsert(report);
+        return i1;
     }
 
     public List<ReportComment> reports() {

@@ -52,7 +52,7 @@ public class commentDaoImpl implements IcommentDao {
         Connection conn = JDBC.getConnection();
         PreparedStatement ps = null;
         try {
-            ps = conn.prepareStatement("delete from commemt where comment_id=?");
+            ps = conn.prepareStatement("update comment set comment_status=2 where comment_id=?");
             ps.setInt(1,comment_id);
             ps.executeUpdate();
         }catch (Exception e){
@@ -132,7 +132,7 @@ public class commentDaoImpl implements IcommentDao {
         List<Advancedcomment> list = new ArrayList<Advancedcomment>();        
         
         try {
-            ps = conn.prepareStatement("select comment_id,play_id,`user`.user_id,comment_message,comment_time,comment_id,comment_status,comment_dateout,user_name from comment,user where comment.user_id = `user`.user_id and play_id = ?");
+            ps = conn.prepareStatement("select comment_id,play_id,`user`.user_id,comment_message,comment_time,comment_id,comment_status,comment_dateout,user_name from comment,user where comment.user_id = `user`.user_id and play_id = ? and comment.comment_status=1");
             ps.setString(1, playid);
             resultSet = ps.executeQuery();
             while(resultSet.next()) {

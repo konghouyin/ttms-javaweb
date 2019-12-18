@@ -46,4 +46,9 @@ public class commentService {
 
 		return comments;
 	}
+
+	public int update(int comment_id){
+		int i = commentDao.commentDelete(comment_id);
+		return i;
+	}
 }

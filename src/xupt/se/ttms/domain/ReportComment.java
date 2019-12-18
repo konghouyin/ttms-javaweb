@@ -6,6 +6,7 @@ package xupt.se.ttms.domain;
  * @create: 2019-12-17 21:10
  **/
 public class ReportComment {
+    Integer comment_id;
     String username;
     String comment_message;
     String playname;
@@ -15,12 +16,21 @@ public class ReportComment {
     @Override
     public String toString() {
         return "ReportComment{" +
-                "username='" + username + '\'' +
+                "comment_id=" + comment_id +
+                ", username='" + username + '\'' +
                 ", comment_message='" + comment_message + '\'' +
                 ", playname='" + playname + '\'' +
                 ", comment_time='" + comment_time + '\'' +
                 ", type='" + type + '\'' +
                 '}';
+    }
+
+    public Integer getComment_id() {
+        return comment_id;
+    }
+
+    public void setComment_id(Integer comment_id) {
+        this.comment_id = comment_id;
     }
 
     public String getComment_time() {

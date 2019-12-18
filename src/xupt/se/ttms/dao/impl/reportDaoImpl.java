@@ -120,7 +120,7 @@ public class reportDaoImpl implements IreportDao {
         PreparedStatement ps = null;
         ResultSet resultSet = null;
         try {
-            ps = conn.prepareStatement("select user.user_name,play.play_name,comment.comment_time,reporttype.reportType_name,comment.comment_message from user,play,comment,report,reporttype where report.comment_id=comment.comment_id and report.report_typeId=reporttype.reportType_id and comment.user_id=user.user_id and comment.play_id=play.play_id");
+            ps = conn.prepareStatement("select user.user_name,play.play_name,comment.comment_time,comment.comment_id,reporttype.reportType_name,comment.comment_message from user,play,comment,report,reporttype where comment.comment_status=2 report.comment_id=comment.comment_id and report.report_typeId=reporttype.reportType_id and comment.user_id=user.user_id and comment.play_id=play.play_id");
 //            ps.setInt(1,reportType_id);
             resultSet = ps.executeQuery();
             List<ReportComment> list = new ArrayList<ReportComment>();
@@ -134,6 +134,7 @@ public class reportDaoImpl implements IreportDao {
                 type.setComment_time(resultSet.getString("comment_time"));
                 type.setType(resultSet.getString("reportType_name"));
                 type.setComment_message(resultSet.getString("comment_message"));
+                type.setComment_id(resultSet.getInt("comment_id"));
                 list.add(type);
             }
             return list;

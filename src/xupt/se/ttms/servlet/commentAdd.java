@@ -32,7 +32,9 @@ public class commentAdd extends HttpServlet {
             resp.getWriter().println(JSON.toJSONString(JSONobj));
         }else {
         	commentService service = new commentService();
-    		int comment = service.commentAdd(comment_msg, grade,1,40);
+			Object userId = req.getSession().getAttribute("userId");
+			int id = Integer.valueOf((String) userId);
+			int comment = service.commentAdd(comment_msg, grade,1,id);
     		//后期替换两个参数
     		
     		backMessage JSONobj = new backMessage(1, "添加成功", comment);
